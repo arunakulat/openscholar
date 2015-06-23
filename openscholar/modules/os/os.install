@@ -750,3 +750,18 @@ function os_update_7036() {
   );
   features_revert($revert);
 }
+
+/**
+ * Uninstall the os_biocv module
+ */
+function os_update_7037() {
+  features_revert(array(
+    "os" => array("context", "spaces_presets"),
+    "vsite" => array("spaces_presets"),
+  ));
+
+  if( module_exists('os_biocv')) {
+    module_disable(array('os_biocv'));
+    drupal_uninstall_modules(array('os_biocv'));
+  }
+}
